@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const { default: mongoose } = require("mongoose");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -32,16 +33,22 @@ router.post(
           .status(400)
           .json({ error: "Sorry a user with same email exists" });
       }
+      
+      const salt = await bcrypt.genSalt(10)
+      const securedPwd = await bcrypt.hash(req.body.password, salt);
+
       user = await User.create({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: securedPwd,
       });
 
       res.json(user);
+      console.log(user);
+      
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some error occurred")
+      res.status(500).send("Some error occurred");
     }
   }
 );

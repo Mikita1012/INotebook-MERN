@@ -18,10 +18,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-//   date: {
-//     type: String,
-//     required: Date.now,
-//   },
+  //   date: {
+  //     type: String,
+  //     required: Date.now,
+  //   },
 });
 
 const User = mongoose.model("user", UserSchema);
