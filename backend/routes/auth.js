@@ -2,7 +2,9 @@ const express = require("express");
 const User = require("../models/User");
 const { default: mongoose } = require("mongoose");
 const { body, validationResult } = require("express-validator");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "your_jwt_secret_key"; // Define your JWT secret key here
 
 const router = express.Router();
 
@@ -33,8 +35,8 @@ router.post(
           .status(400)
           .json({ error: "Sorry a user with same email exists" });
       }
-      
-      const salt = await bcrypt.genSalt(10)
+
+      const salt = await bcrypt.genSalt(10);
       const securedPwd = await bcrypt.hash(req.body.password, salt);
 
       user = await User.create({
@@ -43,9 +45,18 @@ router.post(
         password: securedPwd,
       });
 
-      res.json(user);
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const authToken = jwt.sign(data, JWT_SECRET);
+      console.log(authToken);
+
+      // res.json(user);
+      res.json(authToken);
+
       console.log(user);
-      
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Some error occurred");
