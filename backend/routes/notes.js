@@ -45,8 +45,9 @@ router.post(
 
       res.json(savedNote);
     } catch (error) {
-      res.status(401).
-        send({ error: "Please authenticate using a valid token" });
+      res
+        .status(401)
+        .send({ error: "Please authenticate using a valid token" });
     }
   }
 );
@@ -66,20 +67,46 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
   }
 
   // find the note to be updated ad update it
-  let note = await Notes.findById(req.params.id);
-  if (!note) {
-    return res.status(404).send("Not Found");
-  }
-  if (note.user.toString() !== req.user.id) {
-    return res.status(401).send("Not Allowed");
-  }
+  try {
+    let note = await Notes.findById(req.params.id);
+    if (!note) {
+      return res.status(404).send("Not Found");
+    }
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).send("Not Allowed");
+    }
 
-  note = await Notes.findByIdAndUpdate(
-    req.params.id,
-    { $set: newNote },
-    { new: true }
-  );
-  res.json({ note });
+    note = await Notes.findByIdAndUpdate(
+      req.params.id,
+      { $set: newNote },
+      { new: true }
+    );
+    res.json({ note });
+  } catch (error) {
+    res.status(401).send({ error: "Please authenticate using a valid token" });
+  }
+});
+
+// ROUTE 4: DELETE A NOTE USING DELETE. "api/notes/deltenote"
+router.delete("/deletenote/:id", fetchuser, async (req, res) => {
+  
+  try {
+    // find the note to be deleted and delete it
+    let note = await Notes.findById(req.params.id);
+    if (!note) {
+      return res.status(404).send("Not Found");
+    }
+
+    // Allow deletion only if the person owns this note
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).send("Not Allowed");
+    }
+
+    note = await Notes.findByIdAndDelete(req.params.id);
+    res.json({ Success: "Successfully the note has been deleted", note: note });
+  } catch (error) {
+    res.status(401).send({ error: "Please authenticate using a valid token" });
+  }
 });
 
 module.exports = router;
