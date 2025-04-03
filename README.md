@@ -68,3 +68,36 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+<!-- App.js (or Your Main Application Component):
+
+This is the root component of your application.
+It wraps the entire application or the relevant parts with the NotesState context provider.
+It contains routes or other high level logic.
+
+NotesState (Context Provider):
+This component provides the NotesContext.
+It manages the notes state and the addNote, editNote, and deleteNote functions.
+It wraps the Notes component, making the context values available to all its descendants.
+
+Notes:
+This component acts as a container for the AddANote and NotesList components.
+It ensures that both components are rendered on the same page.
+It handles the layout and organization of these components.
+
+AddANote:
+This component provides the form to add new notes.
+It uses the addNote function from the NotesContext to add notes.
+
+NotesList:
+This component receives the notes array from the NotesContext.
+It maps over the notes array and renders a NoteItem component for each note.
+It is responsible for displaying the list of notes.
+
+NoteItem:
+This component represents a single note item.
+It receives the note data as props.
+It displays the note's title, description, and other relevant information.
+It also contains the delete and edit icons. -->

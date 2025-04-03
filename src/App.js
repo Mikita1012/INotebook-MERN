@@ -27,3 +27,13 @@ function App() {
 }
 
 export default App;
+
+// HIERACRHARY OF iNOTEBOOK
+// App.js (or your main application component)
+//   └── NotesState (Context Provider)
+//       └── Notes
+//           ├── AddANote
+//           └── NotesList
+//               └── NoteItem
+
+
