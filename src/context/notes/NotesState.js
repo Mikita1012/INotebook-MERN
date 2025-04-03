@@ -84,7 +84,6 @@ const NotesState = (props) => {
 
   const addNote = (title, description, tag) => {
     // ṬODO: ADD API CALL 
-    console.log("Adding a new note");
     
     const note = {
       _id:  uuidv4(),// Generate a unique ID
@@ -99,8 +98,16 @@ const NotesState = (props) => {
     console.log("Notes after addNote: ", notes);
     
   };
-  const deleteNote = () => {};
-  const editNote = () => {};
+  const deleteNote = (id) => {
+    // ṬODO: ADD API CALL
+    console.log("note deleted " + id);
+    const newNotes = notes.filter((notes) => {return notes._id != id})
+    setNotes(newNotes);
+    
+  };
+  const editNote = (id, title, description, tag) => {
+
+  };
 
   return (
     <NotesContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
