@@ -6,12 +6,12 @@ function NoteItem(props) {
   const { deleteNote, editNote } = context;
 
   const onDelete = (id) => {
-    deleteNote(id)
-  }
+    deleteNote(id);
+  };
 
   const onEditNote = (id) => {
     editNote(id);
-  }
+  };
 
   const {
     ele = { title: "Default Title", description: "Default Description" },
@@ -22,8 +22,20 @@ function NoteItem(props) {
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{ele.title}</h5>
-            <i className="fa-solid fa-trash mx-2" onClick={()=>{onDelete(ele._id)}}></i>
-            <i className="fa-solid fa-pen-to-square mx-2" onClick={() => {onEditNote(ele._id)}}></i>
+
+            <i
+              className="fa-solid fa-trash mx-2"
+              onClick={() => {
+                onDelete(ele._id);
+              }}
+            ></i>
+            <i
+              className="fa-solid fa-pen-to-square mx-2"
+              onClick={() => {
+                props.updateNote(ele); // Pass the current note object (ele) to the updateNote function
+              }}
+            ></i>
+            <h5 className="blockquote-footer mb-0">{ele.tag}</h5>
           </div>
 
           <p className="card-text">{ele.description}</p>
