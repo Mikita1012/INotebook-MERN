@@ -3,10 +3,14 @@ import NotesContext from "../context/notes/NotesContext";
 
 function NoteItem(props) {
   const context = useContext(NotesContext);
-  const { deleteNote } = context;
+  const { deleteNote, editNote } = context;
 
   const onDelete = (id) => {
     deleteNote(id)
+  }
+
+  const onEditNote = (id) => {
+    editNote(id);
   }
 
   const {
@@ -19,7 +23,7 @@ function NoteItem(props) {
           <div className="d-flex align-items-center">
             <h5 className="card-title">{ele.title}</h5>
             <i className="fa-solid fa-trash mx-2" onClick={()=>{onDelete(ele._id)}}></i>
-            <i className="fa-solid fa-pen-to-square mx-2"></i>
+            <i className="fa-solid fa-pen-to-square mx-2" onClick={() => {onEditNote(ele._id)}}></i>
           </div>
 
           <p className="card-text">{ele.description}</p>

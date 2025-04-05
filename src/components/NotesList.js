@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import NotesContext from "../context/notes/NotesContext";
 import NoteItem from "./NoteItem";
 
 const NotesList = (props) => {
-  const { notes } = useContext(NotesContext);
+  const { notes, getNotes } = useContext(NotesContext);
   // console.log(notes);
 
+  useEffect(() => {
+    getNotes()
+  }, [])
   return (
     <div className="row">
       {notes.length > 0 ? (
