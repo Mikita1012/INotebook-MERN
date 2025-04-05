@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NotesContext from "../context/notes/NotesContext";
 
 
@@ -7,6 +7,11 @@ function AddANote() {
   const { addNote } = context;
   const [note, setNote] = useState({title: "" , description: "", tag: ""})
 
+  useEffect(() => {
+    console.log("Notes added :", note); 
+    addNote();
+    // eslint-disable-next-line
+  }, []);
   const handleClick = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
@@ -30,6 +35,8 @@ function AddANote() {
               className="form-control"
               onChange={onChange}
               id="title"
+              minLength={3}
+              required
               value={note.title}
               name="title"
             />
@@ -44,6 +51,8 @@ function AddANote() {
               className="form-control"
               onChange={onChange}
               id="description"
+              minLength={10}
+              required
               value={note.description}
               name="description"
             />
@@ -66,6 +75,7 @@ function AddANote() {
             type="submit"
             className="btn btn-primary"
             onClick={handleClick}
+            disabled={note.title < 3 || note.description < 10 }
           >
             Add Note
           </button>

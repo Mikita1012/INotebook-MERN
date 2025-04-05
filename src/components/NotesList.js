@@ -95,6 +95,8 @@ const NotesList = (props) => {
                       className="form-control"
                       onChange={onChange}
                       id="etitle"
+                      minLength={10}
+                      required
                       value={note.etitle}
                       name="etitle"
                     />
@@ -108,6 +110,8 @@ const NotesList = (props) => {
                       className="form-control"
                       onChange={onChange}
                       id="edescription"
+                      minLength={10}
+                      required
                       value={note.edescription}
                       name="edescription"
                     />
@@ -139,6 +143,7 @@ const NotesList = (props) => {
                   type="button"
                   className="btn btn-primary"
                   onClick={handleClick}
+                  disabled={note.etitle < 3 || note.edescription < 10 }
                 >
                   Update Note
                 </button>
