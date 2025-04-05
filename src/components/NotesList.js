@@ -8,7 +8,9 @@ const NotesList = (props) => {
 
   useEffect(() => {
     getNotes();
-  }, []);
+    // eslint-disable-next-line
+  },[]);
+  
 
   useEffect(() => {
     console.log("Notes updated in NotesList:", notes); // Debug log to verify that the notes state is updated

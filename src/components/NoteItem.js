@@ -3,15 +3,12 @@ import NotesContext from "../context/notes/NotesContext";
 
 function NoteItem(props) {
   const context = useContext(NotesContext);
-  const { deleteNote, editNote } = context;
+  const { deleteNote} = context;
 
   const onDelete = (id) => {
     deleteNote(id);
   };
 
-  const onEditNote = (id) => {
-    editNote(id);
-  };
 
   const {
     ele = { title: "Default Title", description: "Default Description" },

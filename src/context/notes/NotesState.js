@@ -96,6 +96,8 @@ const NotesState = (props) => {
     }
 
     const updatedNote = await response.json(); // Parse the updated note from the response
+    console.log(updatedNote);
+    
 
     // Update the notes state with the modified note
     const newNotes = notes.map((note) =>
