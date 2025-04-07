@@ -11,7 +11,7 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand" to="/">
             iNotebook
           </Link>
           <button
@@ -49,6 +49,10 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
+            <form className="d-flex">
+                  <Link className="btn btn-primary mx-2" to="/login">Login</Link>
+                  <Link className="btn btn-primary mx-2" to="/signup">Sign Up</Link>
+            </form>
           </div>
         </div>
       </nav>
