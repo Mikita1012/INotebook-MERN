@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function Login() {
+function Login(props) {
+  const {showAlert} = props
   const host = "http://localhost:5000";
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -24,9 +25,10 @@ function Login() {
     if (json.success) {
       // save the auth token and redirect
       localStorage.setItem("token", json.authToken);
-      navigate("/")
+      navigate("/");
+      showAlert("Logged in successfully", "success");
     } else {
-      alert("Invaild Credentails");
+      showAlert("Invaild credentials", "danger");
     }
     console.log(json);
 

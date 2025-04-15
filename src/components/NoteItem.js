@@ -5,8 +5,10 @@ function NoteItem(props) {
   const context = useContext(NotesContext);
   const { deleteNote} = context;
 
+
   const onDelete = (id) => {
     deleteNote(id);
+    props.showAlert("Note deleted successfully", "primary");
   };
 
 
@@ -15,7 +17,7 @@ function NoteItem(props) {
   } = props;
   return (
     <div className="col mb-3">
-      <div className="card my-3" key={ele._id}>
+      <div className="card my-3 shadow p-3bg-body-tertiary rounded border border-primary-subtle" key={ele._id}>
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{ele.title}</h5>

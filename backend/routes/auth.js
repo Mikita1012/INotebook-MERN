@@ -27,13 +27,15 @@ router.post(
     }
     // check whether the user with email exists
     try {
+      success = false;
       let user = await User.findOne({ email: req.body.email });
       console.log(user);
 
       if (user) {
+        
         return res
           .status(400)
-          .json({ error: "Sorry a user with same email exists" });
+          .json({ success, error: "Sorry a user with same email exists" });
       }
 
       const salt = await bcrypt.genSalt(10);
@@ -51,10 +53,11 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT_SECRET);
-      console.log(authToken);
+      success = true;
+      console.log(success, authToken);
 
       // res.json(user);
-      res.json({ authToken });
+      res.json({ success, authToken });
 
       console.log(user);
     } catch (error) {
@@ -73,9 +76,10 @@ router.post(
   ],
   async (req, res) => {
     // if there are errors, return bad req and the errors
+    success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
 
     const { email, password } = req.body;

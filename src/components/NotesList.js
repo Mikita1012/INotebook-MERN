@@ -4,13 +4,18 @@ import NoteItem from "./NoteItem";
 
 const NotesList = (props) => {
   const { notes, getNotes, editNote } = useContext(NotesContext);
-  const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
+  const { showAlert } = props;
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "",
+  });
 
   useEffect(() => {
     getNotes();
     // eslint-disable-next-line
-  },[]);
-  
+  }, []);
 
   useEffect(() => {
     console.log("Notes updated in NotesList:", notes); // Debug log to verify that the notes state is updated
@@ -20,7 +25,12 @@ const NotesList = (props) => {
 
   const updateNote = (currentNote) => {
     console.log("updateNote called with:", currentNote); // Debug log
-    if (!currentNote || !currentNote.title || !currentNote.description || !currentNote.tag) {
+    if (
+      !currentNote ||
+      !currentNote.title ||
+      !currentNote.description ||
+      !currentNote.tag
+    ) {
       console.error("updateNote called with invalid currentNote", currentNote);
       return;
     }
@@ -37,9 +47,11 @@ const NotesList = (props) => {
     e.preventDefault();
     editNote(note.id, note.etitle, note.edescription, note.etag); // Call editNote with the updated note details
     console.log("Note updated:", note); // Debug log to verify the updated note
-
+    props.showAlert("Updated successfully", "info");
     // Close the modal programmatically after updating the note
-    const modalCloseButton = document.querySelector('[data-bs-dismiss="modal"]');
+    const modalCloseButton = document.querySelector(
+      '[data-bs-dismiss="modal"]'
+    );
     if (modalCloseButton) modalCloseButton.click();
   };
 
@@ -143,7 +155,7 @@ const NotesList = (props) => {
                   type="button"
                   className="btn btn-primary"
                   onClick={handleClick}
-                  disabled={note.etitle < 3 || note.edescription < 10 }
+                  disabled={note.etitle < 3 || note.edescription < 10}
                 >
                   Update Note
                 </button>
@@ -156,7 +168,12 @@ const NotesList = (props) => {
       <div className="row">
         {notes.length > 0 ? (
           notes.map((note) => (
-            <NoteItem key={note._id} ele={note} updateNote={updateNote} />
+            <NoteItem
+              key={note._id}
+              ele={note}
+              updateNote={updateNote}
+              showAlert={showAlert}
+            />
           ))
         ) : (
           <p>No notes available</p>
