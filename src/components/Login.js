@@ -24,7 +24,7 @@ function Login(props) {
     const json = await response.json();
     if (json.success) {
       // save the auth token and redirect
-      localStorage.setItem("token", json.authToken);
+      localStorage.setItem('token', json.authToken);
       navigate("/");
       showAlert("Logged in successfully", "success");
     } else {
@@ -40,7 +40,8 @@ function Login(props) {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <>
+    <div className="mt-3">
+    <h1 className="fw-semibold font-monospace text-primary-emphasis">Login to continue in iNotebook</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -74,7 +75,7 @@ function Login(props) {
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

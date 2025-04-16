@@ -7,11 +7,11 @@ function AddANote(props) {
   const { addNote } = context;
   const [note, setNote] = useState({title: "" , description: "", tag: ""})
 
-  useEffect(() => {
-    console.log("Notes added :", note); 
-    addNote();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   console.log("Notes added :", note); 
+  //   // eslint-disable-next-line
+  // }, []);
+  
   const handleClick = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);

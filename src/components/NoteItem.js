@@ -17,9 +17,9 @@ function NoteItem(props) {
   } = props;
   return (
     <div className="col mb-3">
-      <div className="card my-3 shadow p-3bg-body-tertiary rounded border border-primary-subtle" key={ele._id}>
+      <div className="card my-3 shadow p-3bg-body-tertiary rounded border border-primary-subtle border-4" key={ele._id}>
         <div className="card-body">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center border-bottom">
             <h5 className="card-title">{ele.title}</h5>
 
             <i

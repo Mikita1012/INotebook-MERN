@@ -42,7 +42,8 @@ function SignUp(props) {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <>
+    <div className="mt-3 ">
+    <h1 className="fw-semibold font-monospace text-primary-emphasis">Create an account to use iNotebook</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -103,7 +104,7 @@ function SignUp(props) {
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 }
 
