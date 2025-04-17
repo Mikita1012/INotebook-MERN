@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import NotesContext from "../context/notes/NotesContext";
+import '../components/NoteItem.css'
 
 function NoteItem(props) {
+
   const context = useContext(NotesContext);
   const { deleteNote} = context;
 
@@ -29,12 +31,12 @@ function NoteItem(props) {
               }}
             ></i>
             <i
-              className="fa-solid fa-pen-to-square mx-2"
+              className="fa-solid fa-pen-to-square"
               onClick={() => {
                 props.updateNote(ele); // Pass the current note object (ele) to the updateNote function
               }}
             ></i>
-            <h5 className="blockquote-footer mb-0">{ele.tag}</h5>
+            <h5 className="blockquote-footer mb-0 text-end mx-3">{ele.tag}</h5>
           </div>
 
           <p className="card-text">{ele.description}</p>

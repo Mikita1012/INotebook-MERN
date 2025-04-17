@@ -1,0 +1,11 @@
+
+
+.fa-trash:hover {
+    color: red;
+    font-size: large;
+}
+
+.fa-pen-to-square:hover {
+    color: blue;
+    font-size: large;
+}
